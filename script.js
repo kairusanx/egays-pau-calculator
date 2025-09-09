@@ -128,8 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 player2Balls = [];
                 ballButtons.forEach(button => {
                     button.classList.remove('scored');
+                    button.removeAttribute('data-disabled-by');
+                    button.disabled = false; // Enable for the starting player
                 });
-                enableBallButtons();
                 updateDisplays();
                 updatePlayerTurnDisplay();
             }

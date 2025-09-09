@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #1a202c;
+  color: #e2e8f0;
+}
+
+.ball-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  transition: transform 0.1s ease, background-color 0.1s ease, box-shadow 0.1s ease, opacity 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  margin: 8px;
+}
+
+.ball-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: 1;
+}
+.ball-number { position: relative; z-index: 2; }
+
+.ball-button:hover:not(.scored) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.scored {
+  opacity: 0.5;
+  box-shadow: none;
+  cursor: pointer;
+  transform: none;
+}
+.scored:hover { opacity: 0.7; }
+
+/* Ball colors */
+.solid-ball { background-color: #ef4444; }
+.solid-ball.orange { background-color: #f97316; }
+.solid-ball.green { background-color: #22c55e; }
+.solid-ball.maroon { background-color: #b91c1c; }
+.solid-ball.blue { background-color: #3b82f6; }
+.solid-ball.purple { background-color: #8b5cf6; }
+.solid-ball.black { background-color: #000; }
+.solid-ball.yellow { background-color: #eab308; }
+
+.striped-ball { background-color: #ffffff; color: #000; }
+.striped-ball::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background-color: inherit;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.striped-ball.red::after { background-color: #ef4444; }
+.striped-ball.orange::after { background-color: #f97316; }
+.striped-ball.green::after { background-color: #22c55e; }
+.striped-ball.maroon::after { background-color: #b91c1c; }
+.striped-ball.blue::after { background-color: #3b82f6; }
+.striped-ball.purple::after { background-color: #8b5cf6; }
+.striped-ball.black::after { background-color: #000; }
+.striped-ball.yellow::after { background-color: #eab308; }
+
+.solid-ball.yellow .ball-number, .striped-ball .ball-number { color: #000; }
+.striped-ball.black .ball-number { color: #fff; }
+
+.active-player {
+  border: 4px solid #34d399;
+  box-shadow: 0 0 15px rgba(52, 211, 153, 0.5);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(52, 211, 153, 0.5);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.8);
+  }
+}
+
+.control-button {
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.control-button:hover { transform: scale(1.02); }
+.control-button:active { transform: scale(0.98); }
+
+.player-name {
+  cursor: pointer;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.3);
+  outline: none;
+  padding: 2px;
+  transition: border-bottom-color 0.2s ease;
+}
+.player-name:focus { border-bottom-color: #34d399; }
+
+.ball-list-item {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  font-size: 0.8rem;
+  margin: 2px;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .ball-button {
+    width: 50px;
+    height: 50px;
+    font-size: 0.9rem;
+  }
+  .ball-grid { grid-template-columns: repeat(4, 1fr); }
+}

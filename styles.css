@@ -1,139 +1,143 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+/* Import the Inter font for a clean, modern look */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #1a202c;
-  color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f7f7f7; /* Light background for a modern feel */
+    color: #333; /* Dark text for contrast */
 }
-
 .ball-button {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: #fff;
-  transition: transform 0.1s ease, background-color 0.1s ease, box-shadow 0.1s ease, opacity 0.2s ease;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  position: relative;
-  overflow: hidden;
-  margin: 8px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    margin: 8px;
+    text-shadow: none; /* Remove text shadow for light background */
+    background-color: white; /* White background for the buttons */
+    border: 3px solid transparent; /* A border to be colored later */
 }
 
-.ball-button::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
-  z-index: 1;
-}
-.ball-number { position: relative; z-index: 2; }
-
-.ball-button:hover:not(.scored) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.scored {
-  opacity: 0.5;
-  box-shadow: none;
-  cursor: pointer;
-  transform: none;
-}
-.scored:hover { opacity: 0.7; }
-
-/* Ball colors */
-.solid-ball { background-color: #ef4444; }
-.solid-ball.orange { background-color: #f97316; }
-.solid-ball.green { background-color: #22c55e; }
-.solid-ball.maroon { background-color: #b91c1c; }
-.solid-ball.blue { background-color: #3b82f6; }
-.solid-ball.purple { background-color: #8b5cf6; }
-.solid-ball.black { background-color: #000; }
-.solid-ball.yellow { background-color: #eab308; }
-
-.striped-ball { background-color: #ffffff; color: #000; }
+/* Style for the colored stripe on striped balls */
 .striped-ball::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 25px;
-  background-color: inherit;
-  transform: translateY(-50%);
-  z-index: 1;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background-color: inherit; /* This will get color from the class */
+    transform: translateY(-50%);
+    z-index: 1;
 }
+
 .striped-ball.red::after { background-color: #ef4444; }
 .striped-ball.orange::after { background-color: #f97316; }
 .striped-ball.green::after { background-color: #22c55e; }
-.striped-ball.maroon::after { background-color: #b91c1c; }
+.striped-ball.maroon::after { background-color: #a42c3d; }
 .striped-ball.blue::after { background-color: #3b82f6; }
 .striped-ball.purple::after { background-color: #8b5cf6; }
 .striped-ball.black::after { background-color: #000; }
 .striped-ball.yellow::after { background-color: #eab308; }
 
-.solid-ball.yellow .ball-number, .striped-ball .ball-number { color: #000; }
-.striped-ball.black .ball-number { color: #fff; }
+/* The numbers need to be black for better readability on light balls */
+.ball-number {
+    color: #000;
+    position: relative;
+    z-index: 2; /* Ensure the number is on top of the stripe */
+}
+/* Specific override for black balls to make them visible */
+.solid-ball.black { 
+    background-color: #000; 
+    border-color: #000;
+}
+.solid-ball.black .ball-number { 
+    color: #fff; 
+}
 
+/* Set the border color for solid balls */
+.solid-ball.yellow { border-color: #eab308; }
+.solid-ball.blue { border-color: #3b82f6; }
+.solid-ball.red { border-color: #ef4444; }
+.solid-ball.purple { border-color: #8b5cf6; }
+.solid-ball.orange { border-color: #f97316; }
+.solid-ball.green { border-color: #22c55e; }
+.solid-ball.maroon { border-color: #a42c3d; }
+
+/* Set the border color for striped balls */
+.striped-ball.yellow { border-color: #eab308; }
+.striped-ball.blue { border-color: #3b82f6; }
+.striped-ball.red { border-color: #ef4444; }
+.striped-ball.purple { border-color: #8b5cf6; }
+.striped-ball.orange { border-color: #f97316; }
+.striped-ball.green { border-color: #22c55e; }
+.striped-ball.maroon { border-color: #a42c3d; }
+.striped-ball.black { border-color: #000; }
+
+/* Interactive states for buttons */
+.ball-button:hover:not(.scored) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.scored {
+    opacity: 0.5;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Player turn highlight animation */
 .active-player {
-  border: 4px solid #34d399;
-  box-shadow: 0 0 15px rgba(52, 211, 153, 0.5);
-  animation: pulse 1.5s infinite ease-in-out;
+    border: 4px solid #34d399;
+    box-shadow: 0 0 15px rgba(52, 211, 153, 0.5);
+    animation: pulse 1.5s infinite ease-in-out;
 }
 
 @keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 0 15px rgba(52, 211, 153, 0.5);
-  }
-  50% {
-    transform: scale(1.02);
-    box-shadow: 0 0 20px rgba(52, 211, 153, 0.8);
-  }
+    0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(52, 211, 153, 0.5); }
+    50% { transform: scale(1.02); box-shadow: 0 0 20px rgba(52, 211, 153, 0.8); }
 }
 
 .control-button {
-  transition: background-color 0.2s ease, transform 0.1s ease;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.control-button:hover { transform: scale(1.02); }
-.control-button:active { transform: scale(0.98); }
+.control-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+.control-button:active {
+    transform: translateY(1px);
+}
 
 .player-name {
-  cursor: pointer;
-  border-bottom: 2px dashed rgba(255, 255, 255, 0.3);
-  outline: none;
-  padding: 2px;
-  transition: border-bottom-color 0.2s ease;
+    cursor: pointer;
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.3);
+    outline: none;
+    padding: 2px;
+    transition: border-bottom-color 0.2s ease;
 }
-.player-name:focus { border-bottom-color: #34d399; }
+.player-name:focus {
+    border-bottom-color: #34d399;
+}
 
 .ball-list-item {
-  display: inline-flex;
-  width: 24px;
-  height: 24px;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  font-size: 0.8rem;
-  margin: 2px;
-  font-weight: 600;
-}
-
-@media (max-width: 640px) {
-  .ball-button {
-    width: 50px;
-    height: 50px;
-    font-size: 0.9rem;
-  }
-  .ball-grid { grid-template-columns: repeat(4, 1fr); }
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    font-size: 0.8rem;
+    margin: 2px;
+    font-weight: 600;
 }

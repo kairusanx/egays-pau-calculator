@@ -1,60 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Egay's Pau Calculator</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egay's PAU CALCULATOR</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-900 text-gray-200">
-  <div class="flex flex-col items-center justify-center min-h-screen p-4">
-    <div class="bg-gray-800 p-6 sm:p-8 rounded-lg shadow-xl max-w-4xl w-full">
-      <h1 class="text-3xl sm:text-4xl font-bold text-center mb-4 sm:mb-6">Egay's Pau Calculator</h1>
+<body class="bg-gray-100 text-gray-800">
+    <div class="flex flex-col items-center justify-center min-h-screen p-4">
+        <div class="bg-white p-6 sm:p-8 rounded-lg shadow-xl max-w-4xl w-full">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-4 sm:mb-6">EGAY's PAU SCOREBOARD</h1>
 
-      <div class="flex flex-col sm:flex-row justify-center items-start gap-4 mb-6">
-        <div id="player1-box" class="player-box bg-gray-700 p-4 rounded-xl flex-grow text-center transition-all duration-300">
-          <p class="text-lg font-semibold mb-2">
-            <span id="player1-name" class="player-name" contenteditable="true"></span>
-          </p>
-          <h2 id="player1-score" class="text-4xl sm:text-5xl font-extrabold mt-1">0</h2>
-          <p id="player1-needed-score" class="text-sm text-gray-400 mt-2"></p>
-          <div id="player1-balls-list" class="mt-4 flex flex-wrap justify-center gap-1 min-h-[30px] border border-gray-600 rounded-md p-2"></div>
+            <div class="flex flex-col sm:flex-row justify-center items-start gap-4 mb-6">
+                <!-- Player 1 Scoreboard -->
+                <div id="player1-box" class="player-box bg-gray-200 p-4 rounded-xl flex-grow text-center transition-all duration-300">
+                    <p class="text-lg font-semibold mb-2">
+                        <span id="player1-name" class="player-name" contenteditable="true">Player 1</span>
+                    </p>
+                    <h2 class="text-4xl sm:text-5xl font-extrabold mt-1">
+                        <span id="player1-score">0</span>
+                    </h2>
+                    <p class="text-sm mt-1 text-gray-500">Games Won: <span id="player1-win-tally" class="font-bold text-lg text-green-600">0</span></p>
+                    <p id="player1-needed-score" class="text-sm text-gray-500 mt-2"></p>
+                    <div id="player1-balls-list" class="mt-4 flex flex-wrap justify-center gap-1 min-h-[30px] border border-gray-400 rounded-md p-2"></div>
+                </div>
+                <!-- Player 2 Scoreboard -->
+                <div id="player2-box" class="player-box bg-gray-200 p-4 rounded-xl flex-grow text-center transition-all duration-300">
+                    <p class="text-lg font-semibold mb-2">
+                        <span id="player2-name" class="player-name" contenteditable="true">Player 2</span>
+                    </p>
+                    <h2 class="text-4xl sm:text-5xl font-extrabold mt-1">
+                        <span id="player2-score">0</span>
+                    </h2>
+                    <p class="text-sm mt-1 text-gray-500">Games Won: <span id="player2-win-tally" class="font-bold text-lg text-green-600">0</span></p>
+                    <p id="player2-needed-score" class="text-sm text-gray-500 mt-2"></p>
+                    <div id="player2-balls-list" class="mt-4 flex flex-wrap justify-center gap-1 min-h-[30px] border border-gray-400 rounded-md p-2"></div>
+                </div>
+            </div>
+
+            <!-- Handicap Options -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6">
+                <p class="text-lg font-bold">Handicap:</p>
+                <div class="flex flex-wrap gap-4">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="radio" name="handicap" value="none" checked class="form-radio text-blue-600 h-5 w-5">
+                        <span class="text-gray-600">Parihas (61 pts each)</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="radio" name="handicap" value="player2-50" class="form-radio text-blue-600 h-5 w-5">
+                        <span class="text-gray-600">50-70</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="radio" name="handicap" value="player2-40" class="form-radio text-blue-600 h-5 w-5">
+                        <span class="text-gray-600">40-80</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+                <button id="change-turn-button" class="control-button bg-blue-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:bg-blue-700">Change Turn</button>
+                <button id="new-game-button" class="control-button bg-green-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:bg-green-700">Next Game</button>
+                <button id="reset-button" class="control-button bg-red-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:bg-red-700">Reset All</button>
+            </div>
+
+            <!-- Ball Grid -->
+            <div class="ball-grid grid grid-cols-5 gap-4 justify-items-center">
+                <button class="ball-button solid-ball yellow" data-value="1"><span class="ball-number">1</span></button>
+                <button class="ball-button solid-ball blue" data-value="2"><span class="ball-number">2</span></button>
+                <button class="ball-button solid-ball red" data-value="3"><span class="ball-number">3</span></button>
+                <button class="ball-button solid-ball purple" data-value="4"><span class="ball-number">4</span></button>
+                <button class="ball-button solid-ball orange" data-value="5"><span class="ball-number">5</span></button>
+                <button class="ball-button solid-ball green" data-value="6"><span class="ball-number">6</span></button>
+                <button class="ball-button solid-ball maroon" data-value="7"><span class="ball-number">7</span></button>
+                <button class="ball-button solid-ball black" data-value="8"><span class="ball-number">8</span></button>
+                <button class="ball-button striped-ball yellow" data-value="9"><span class="ball-number">9</span></button>
+                <button class="ball-button striped-ball blue" data-value="10"><span class="ball-number">10</span></button>
+                <button class="ball-button striped-ball red" data-value="11"><span class="ball-number">11</span></button>
+                <button class="ball-button striped-ball purple" data-value="12"><span class="ball-number">12</span></button>
+                <button class="ball-button striped-ball orange" data-value="13"><span class="ball-number">13</span></button>
+                <button class="ball-button striped-ball green" data-value="14"><span class="ball-number">14</span></button>
+                <button class="ball-button striped-ball maroon" data-value="15"><span class="ball-number">15</span></button>
+            </div>
         </div>
-        <div id="player2-box" class="player-box bg-gray-700 p-4 rounded-xl flex-grow text-center transition-all duration-300">
-          <p class="text-lg font-semibold mb-2">
-            <span id="player2-name" class="player-name" contenteditable="true"></span>
-          </p>
-          <h2 id="player2-score" class="text-4xl sm:text-5xl font-extrabold mt-1">0</h2>
-          <p id="player2-needed-score" class="text-sm text-gray-400 mt-2"></p>
-          <div id="player2-balls-list" class="mt-4 flex flex-wrap justify-center gap-1 min-h-[30px] border border-gray-600 rounded-md p-2"></div>
-        </div>
-      </div>
-
-      <div class="flex justify-center items-center gap-4 mb-8">
-        <button id="change-turn-button" class="control-button bg-blue-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:bg-blue-700">Change Turn</button>
-        <button id="reset-button" class="control-button bg-red-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:bg-red-700">Reset Game</button>
-      </div>
-
-      <div class="ball-grid grid grid-cols-5 gap-4 justify-items-center">
-        <button class="ball-button solid-ball yellow" data-value="1"><span class="ball-number">1</span></button>
-        <button class="ball-button solid-ball blue" data-value="2"><span class="ball-number">2</span></button>
-        <button class="ball-button solid-ball red" data-value="3"><span class="ball-number">3</span></button>
-        <button class="ball-button solid-ball purple" data-value="4"><span class="ball-number">4</span></button>
-        <button class="ball-button solid-ball orange" data-value="5"><span class="ball-number">5</span></button>
-        <button class="ball-button solid-ball green" data-value="6"><span class="ball-number">6</span></button>
-        <button class="ball-button solid-ball maroon" data-value="7"><span class="ball-number">7</span></button>
-        <button class="ball-button solid-ball black" data-value="8"><span class="ball-number">8</span></button>
-        <button class="ball-button striped-ball yellow" data-value="9"><span class="ball-number">9</span></button>
-        <button class="ball-button striped-ball blue" data-value="10"><span class="ball-number">10</span></button>
-        <button class="ball-button striped-ball red" data-value="11"><span class="ball-number">11</span></button>
-        <button class="ball-button striped-ball purple" data-value="12"><span class="ball-number">12</span></button>
-        <button class="ball-button striped-ball orange" data-value="13"><span class="ball-number">13</span></button>
-        <button class="ball-button striped-ball green" data-value="14"><span class="ball-number">14</span></button>
-        <button class="ball-button striped-ball maroon" data-value="15"><span class="ball-number">15</span></button>
-      </div>
     </div>
-  </div>
-  <script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>

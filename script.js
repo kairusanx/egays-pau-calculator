@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPlayer = 1;
   let player1Balls = [];
   let player2Balls = [];
+  let player1name = "Player 1";
+  let player2name = "Player 2";
 
   const player1ScoreDisplay = document.getElementById('player1-score');
   const player2ScoreDisplay = document.getElementById('player2-score');
@@ -14,6 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const player2BallsList = document.getElementById('player2-balls-list');
   const player1NeededScore = document.getElementById('player1-needed-score');
   const player2NeededScore = document.getElementById('player2-needed-score');
+  const player1NameDisplay = document.getElementById('player1-name');
+  const player2NameDisplay = document.getElementById('player2-name');
+  player1NameDisplay.textContent = player1name;
+  player2NameDisplay.textContent = player2name;
 
   const ballButtons = document.querySelectorAll('.ball-button');
   const changeTurnButton = document.getElementById('change-turn-button');
@@ -70,7 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', () => {
       const ballValue = parseInt(button.getAttribute('data-value'));
       let currentBallsArray = currentPlayer === 1 ? player1Balls : player2Balls;
+      let opponentBallsArray = currentPlayer === 1 ? player2Balls : player1Balls;
       let currentScore = currentPlayer === 1 ? player1Score : player2Score;
+
+      // Prevent the current player from pocketing a ball already pocketed by the opponent
+      if (opponentBallsArray.includes(ballValue)) {
+        alert(`Ball ${ballValue} is already pocketed by the other player!`);
+        return;
+      }
 
       if (button.classList.contains('scored')) {
         currentScore -= ballValue;
